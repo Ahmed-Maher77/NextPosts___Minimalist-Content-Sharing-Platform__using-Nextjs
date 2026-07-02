@@ -8,14 +8,14 @@ import { useOptimistic } from 'react';
 function Post({ post, likeAction }) {
 
   return (
-    <article className="post">
+    <article className="post" aria-labelledby={`post-title-${post.id}`}>
       <div className="post-image">
-        <img src={post.image} alt={post.title} />
+        <img src={post.image} alt="" />
       </div>
       <div className="post-content">
         <header>
           <div>
-            <h2>{post.title}</h2>
+            <h2 id={`post-title-${post.id}`}>{post.title}</h2>
             <p>
               Shared by {post.userFirstName} on{' '}
               <time dateTime={post.createdAt}>
@@ -45,7 +45,7 @@ export default function Posts({ posts }) {
   });
 
   if (!optimisticPosts || optimisticPosts.length === 0) {
-    return <p>There are no posts yet. Maybe start sharing some?</p>;
+    return <p role="status">There are no posts yet. Maybe start sharing some?</p>;
   }
 
   // Update UI immediately, then sync with server
@@ -55,7 +55,7 @@ export default function Posts({ posts }) {
   }
 
   return (
-    <ul className="posts">
+    <ul className="posts" aria-label="Posts list">
       {optimisticPosts.map((post) => (
         <li key={post.id}>
           <Post post={post} likeAction={handleLike} />

@@ -3,7 +3,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="main-footer">
+    <footer id="main-footer" role="contentinfo">
       <p>
         Copyright &copy; {currentYear}.
         Developed By <a href="https://www.linkedin.com/in/ahmed-maher-algohary" title="About Developer" target="_blank" rel="noopener noreferrer">Ahmed Maher</a> {/* security: prevents tab-napping */}

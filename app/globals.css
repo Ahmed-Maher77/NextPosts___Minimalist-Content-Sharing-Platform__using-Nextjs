@@ -4,6 +4,21 @@
   box-sizing: border-box;
 }
 
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #e32195;
+  color: #eee7ea;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
 html {
   font-family: 'Merriweather', serif;
 }

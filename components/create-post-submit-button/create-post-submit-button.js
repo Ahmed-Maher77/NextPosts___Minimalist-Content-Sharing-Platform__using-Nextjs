@@ -5,7 +5,7 @@ const CreatePostSubmitButton = () => {
     const { pending } = useFormStatus();
 
   return (
-    <button type="submit" disabled={pending}>
+    <button type="submit" disabled={pending} aria-busy={pending}>
       {pending ? "Creating..." : "Create Post"}
     </button>
   )
