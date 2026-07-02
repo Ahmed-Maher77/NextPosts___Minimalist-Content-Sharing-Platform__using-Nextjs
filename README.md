@@ -11,7 +11,7 @@
 
 ## 👀 Website Preview:
 <a href="https://nextposts-content-sharing.vercel.app" title="demo">
-  <img src="" alt="website preview - Demo - UI Mockup" width="400">
+  <img src="/public/nextposts_mockup.png" alt="website preview - Demo - UI Mockup" width="400">
 </a>
 
 ---
