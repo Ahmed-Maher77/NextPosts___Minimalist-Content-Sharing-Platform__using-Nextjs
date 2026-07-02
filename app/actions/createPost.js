@@ -3,8 +3,9 @@ import { storePost } from "@/lib/posts";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createPostSchema } from "../validation-schemas";
-import fs from "fs";
+import fs from "node:fs";
 import path from "path";
+import { uploadImage } from "@/lib/cloudinary";
 
 export default async function createPost(prev, formData) {
   const postData = {
@@ -24,6 +25,7 @@ export default async function createPost(prev, formData) {
     };
   }
 
+  const imageUrl = await uploadImage(postData.image);
   const bufferedImage = await postData.image.arrayBuffer();
   const buffer = Buffer.from(bufferedImage);
 
@@ -39,10 +41,10 @@ export default async function createPost(prev, formData) {
   await fs.promises.writeFile(filePath, buffer);
 
   const newPost = {
-    imageUrl: `/images/${filename}`,
+    imageUrl: imageUrl,
     title: postData.title,
     content: postData.content,
-    userId: 2,
+    userId: 1,
   };
 
   console.log(newPost);

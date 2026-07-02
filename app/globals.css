@@ -215,3 +215,32 @@ main {
 .liked .like-button:hover svg {
   fill: transparent;
 }
+
+#main-footer {
+  width: 80%;
+  max-width: 60rem;
+  margin: 0 auto 2rem auto;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 6px;
+  background-color: #1f1b1d;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+  color: #b1a9ac;
+  font-size: 0.9rem;
+}
+
+#main-footer p {
+  margin: 0;
+}
+
+#main-footer a {
+  color: #e32195;
+  text-decoration: none;
+}
+
+#main-footer a:hover {
+  color: #c321e3;
+  text-decoration: underline;
+}
