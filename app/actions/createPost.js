@@ -47,7 +47,6 @@ export default async function createPost(prev, formData) {
     userId: 1,
   };
 
-  console.log(newPost);
   await storePost(newPost);
 
   revalidatePath("/feed");
