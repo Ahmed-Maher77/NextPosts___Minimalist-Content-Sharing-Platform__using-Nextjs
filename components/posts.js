@@ -8,14 +8,14 @@ import { useOptimistic } from 'react';
 function Post({ post, likeAction }) {
 
   return (
-    <article className="post" aria-labelledby={`post-title-${post.id}`}>
+    <article className="post">
       <div className="post-image">
-        <img src={post.image} alt="" />
+        <img src={post.image} alt={post.title} />
       </div>
       <div className="post-content">
         <header>
           <div>
-            <h2 id={`post-title-${post.id}`}>{post.title}</h2>
+            <h2>{post.title}</h2>
             <p>
               Shared by {post.userFirstName} on{' '}
               <time dateTime={post.createdAt}>
@@ -24,7 +24,7 @@ function Post({ post, likeAction }) {
             </p>
           </div>
           <div>
-            <LikeButton isLiked={post.isLiked} likeAction={likeAction} postId={post.id} />
+            <LikeButton isLiked={post.isLiked} likes={post.likes} likeAction={likeAction} postId={post.id} />
           </div>
         </header>
         <p>{post.content}</p>
@@ -40,12 +40,17 @@ export default function Posts({ posts }) {
     const postIndex = prevPosts.findIndex(post => post.id === postId);
     if (postIndex === -1) return prevPosts;
     const updatedPosts = [...prevPosts];
-    updatedPosts[postIndex] = { ...updatedPosts[postIndex], isLiked: !updatedPosts[postIndex].isLiked };
+    const post = updatedPosts[postIndex];
+    updatedPosts[postIndex] = {
+      ...post,
+      isLiked: !post.isLiked,
+      likes: post.isLiked ? post.likes - 1 : post.likes + 1
+    };
     return updatedPosts;
   });
 
   if (!optimisticPosts || optimisticPosts.length === 0) {
-    return <p role="status">There are no posts yet. Maybe start sharing some?</p>;
+    return <p>There are no posts yet. Maybe start sharing some?</p>;
   }
 
   // Update UI immediately, then sync with server
@@ -55,7 +60,7 @@ export default function Posts({ posts }) {
   }
 
   return (
-    <ul className="posts" aria-label="Posts list">
+    <ul className="posts">
       {optimisticPosts.map((post) => (
         <li key={post.id}>
           <Post post={post} likeAction={handleLike} />
